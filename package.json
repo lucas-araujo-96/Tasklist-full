@@ -1,0 +1,30 @@
+{
+  "name": "projetotasklist-fullsystem",
+  "version": "0.1.0",
+  "description": "Sistema de lista de tarefas incluindo front-end e back-end",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucas-araujo-96/ProjetoTaskList-FullSystem.git"
+  },
+  "keywords": [],
+  "author": "Lucas Matheus de Araújo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucas-araujo-96/ProjetoTaskList-FullSystem/issues"
+  },
+  "homepage": "https://github.com/lucas-araujo-96/ProjetoTaskList-FullSystem#readme",
+  "dependencies": {
+    "core-js": "^3.15.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
