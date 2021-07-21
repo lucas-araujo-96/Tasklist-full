@@ -20,11 +20,15 @@ exports.newUserPost = (req, res) => { //recebe os dados do formulário via post
             username: login,
             password: password,
             email: email,
+        }).then(() => {
+            console.log(`User creation success`);
+            res.send(`Usuário criado`);
+        }).catch((e) => {
+            console.log(`MongoDB model creation error`);
         });
-        console.log(`User creation success`);
-        return;
+        
     } else { //caso não
-        console.log(`User creation error`);
+        console.log(`User validation error`);
         res.render(`createAccount`); //volta à página
     };
 };
