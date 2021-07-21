@@ -7,15 +7,16 @@
     <title>New Account</title>
 </head>
 <body>
-    <form action="/" method="POST">
+    <form action="/createAccount" method="POST">
         <fieldset>
-            <legend>Login</legend>
+            <legend>Criar nova conta</legend>
+            <label>Nome: <input type="text" name="realName" placeholder="Seu nome"></label><br />
             <label>E-mail: <input type="email" name="email" placeholder="Insira seu email"></label><br />
             <label>Crie um login: <input type="text" name="login"></label><br />
             <label>Senha: <input type="password" name="password"></label><br />
             <label>confirme a senha: <input type="password" name="confirmPassword"></label><br />
             <input type="submit" value="Criar">
-            <a href="/createAccount">Criar Conta</a>
+            <a href="/login">Voltar ao login</a>
         </fieldset>
     </form>
 </body>
