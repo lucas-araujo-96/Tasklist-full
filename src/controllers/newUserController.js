@@ -10,25 +10,22 @@ exports.newUserPost = (req, res) => { //recebe os dados do formulário via post
     const email = req.body.email;
     const login = req.body.login;
     const password = req.body.password;
-    const confPassword = req.body.confirmPassword;
-    const loginCheck = (login.length > 4 && login.trim() !== ``); //checa a validade do login
-    const passwordCheck = (password === confPassword && password.trim() !== `` && password.length >= 7); //checa a validade da senha
-
-    if(loginCheck && passwordCheck) { //caso estejam válidos, 
-        userModel.create({ //cria a entrada no BD
-            name: realName,
-            username: login,
-            password: password,
-            email: email,
-        }).then(() => {
-            console.log(`User creation success`);
-            res.send(`Usuário criado`);
-        }).catch((e) => {
-            console.log(`MongoDB model creation error`);
-        });
-        
-    } else { //caso não
-        console.log(`User validation error`);
-        res.render(`createAccount`); //volta à página
-    };
+    userModel.find({ username: login, email: email}).then((query) => {
+        if(query.length === 0) {
+             userModel.create({ //cria a entrada no BD
+                name: realName,
+                username: login,
+                password: password,
+                email: email,
+            }).then(() => {
+                console.log(`User creation success`);
+                res.send(`Usuário criado`);
+            }).catch((e) => {
+                console.log(`MongoDB model creation error: ${e}`);
+            });
+        } else {
+            console.log(`Login or email already exists on userbase`);
+            res.render(`createAccount`);
+        };
+    });
 };
