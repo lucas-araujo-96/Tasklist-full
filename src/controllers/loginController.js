@@ -14,7 +14,7 @@ exports.loginPost = (req, res) => {
         if(query.length === 0) { //caso não exista...
             res.render(`login`); //volta pro login
         } else {
-            req.session.user = { name: query.name, id: query.id }; //caso sim, salva nome e id na sessão
+            req.session.user = { name: query[0].name, id: query[0]._id }; //caso sim, salva nome e id na sessão
             res.render(`main`); //e vai pra página principal
         };
     });

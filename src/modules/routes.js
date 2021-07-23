@@ -3,7 +3,8 @@ const path = require(`path`); //requisita o módulo path
 const router = express.Router(); //instancia o roteador
 const loginControl = require(path.join(__dirname, `..`, `controllers`, `loginController`)); //requisita o controller da página de login
 const newUserControl = require(path.join(__dirname, `..`, `controllers`, `newUserController`)); //requisita o controller da página de criação de usuário
-const mainControl = require(path.join(__dirname, `..`, `controllers`, `mainController`));
+const mainControl = require(path.join(__dirname, `..`, `controllers`, `mainController`)); //requisita o controlador da página principal
+const optionsControl = require(path.join(__dirname, `..`, `controllers`, `userInfoController`));
 
 router.get([`/`, `/login`], loginControl.loginGet); //get que responde a página inicial
 router.post(`/`, loginControl.loginPost);
@@ -12,5 +13,8 @@ router.get(`/createAccount`, newUserControl.newUserGet); //get que responde a p�
 router.post(`/createAccount`, newUserControl.newUserPost); //post que cria o novo usuário
 
 router.get(`/logoff`, mainControl.logoff); //get que responde ao link de logoff
+
+router.get(`/accountOptions`, optionsControl.userInfoGet);
+router.post(`/updateInfo`, optionsControl.updateInfo);
 
 module.exports = router; //exporta o roteador
