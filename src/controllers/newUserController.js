@@ -10,7 +10,7 @@ exports.newUserPost = (req, res) => { //recebe os dados do formulário via post
     const email = req.body.email;
     const login = req.body.login;
     const password = req.body.password;
-    userModel.find({ username: login, email: email}).then((query) => {
+    userModel.find( {$or: [{ username: login}, { email: email}]}).then((query) => {
         if(query.length === 0) {
              userModel.create({ //cria a entrada no BD
                 name: realName,

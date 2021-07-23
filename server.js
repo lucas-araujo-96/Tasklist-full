@@ -3,13 +3,26 @@ require(`dotenv`).config(); //requisita o módulo dotenv e já o configura
 const express = require(`express`); //requisita o express
 const path = require(`path`); //requisita o módulo path
 const mongoose = require(`mongoose`); //requisita o módulo mongoose
+const session = require(`express-session`); //requisita o módulo express-session
+const connectMongo = require(`connect-mongo`); //requisita o módulo connect-mongo
 const router = require(path.join(__dirname, `src`, `modules`, `routes`)); //requisita o arquivo de configuração de rotas
 
 const server = express(); //instancia o servidor
+const sessionOptions= session({ //define opções para a sessão
+    secret: `n0n30fy0urbus1ness`,
+    store: connectMongo.create({mongoUrl: process.env.CONNECTIONSTRING}), //usa o connectMongo para abrir uma nova conexão para guardar dados de sessão no BD
+    resave: false,
+    saveUninitialized: false,
+    cookie: { //define o cookie
+        maxAge: 1000*60*60,
+    },
+});
 
 server.use(express.static(path.resolve(__dirname, `public`))); //define a pasta de recursos estáticos
 server.use(express.urlencoded({extended: true})); //habilita o uso de urlencoded para envio de informações por método POST
+server.use(sessionOptions); //habilita o uso de sessões
 server.use(router); //habilita a configuração de rotas
+
 
 mongoose.connect(process.env.CONNECTIONSTRING, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => { //inicia a conexão ao mongo DB utilizando a variável de ambiente connectionString 
     console.log(`Database connected`);

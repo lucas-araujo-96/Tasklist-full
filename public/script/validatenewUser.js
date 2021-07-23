@@ -7,7 +7,7 @@ class Form {
         if(this.fieldsAreValid() && this.passwordIsValid()) {
             this.form.submit();
         } else {
-            window.alert(`Stub Error`);
+            window.alert(this.fieldsAreValid() ? `Senha` : `Campos`);
         };
     };
 
@@ -18,12 +18,9 @@ class Form {
     };
 
     fieldsAreValid() {
-        const email = document.querySelector(`.email`).value.trim();
-        const name = document.querySelector(`.name`).value.trim();
-        const login = document.querySelector(`.login`).value.trim();
-        return ((/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))
-            && name !== `` 
-            && login !== ``);
+        return ((document.querySelector(`.email`).value.trim().length >= 10)
+            && (document.querySelector(`.name`).value.trim().length >= 2)
+            && (document.querySelector(`.login`).value.trim().length >= 6));
     };
 };
 
