@@ -5,10 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Tarefas</title>
+    <link href="/style/main.css" rel="stylesheet">
 </head>
 <body>
-    <h1>stub</h1>
-    <a href="/accountOptions">Opções da conta</a>
-    <a href="/logoff">Sair</a>
+    <div class="body">
+        <header class="header">
+            <h1 class="titulo" class="headerChild">To do:</h1>
+            <div class="links">
+                <a href="/accountOptions" class="link">Opções da conta</a>
+                <a href="/logoff" class="link">Sair</a>
+            </div>
+        </header>
+        <form method="POST" class="newTarefa">
+            <fieldset>
+                <legend>Nova tarefa:</legend>
+                <label>
+                    <input type="text" class="txtTarefa"> <input type="button" value="Nova tarefa" onClick="createTask()">
+                </label>
+            </fieldset>
+        </form>
+        <script src="/script/main.js"></script>
+        <ul class=lista>
+            
+        </ul>
+    </div>
 </body>
 </html>

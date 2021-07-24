@@ -1,0 +1,21 @@
+
+.header {
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    padding: 10px 20px 10px 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+.link {
+    position: relative;
+    top: 40%;
+}
+.newTarefa {
+    text-align: center;
+}
+.lista {
+    list-style: none;
+    text-align: center;
+}
