@@ -10,15 +10,14 @@
     <form action="/createAccount" method="POST" class="form">
         <fieldset>
             <legend>Criar nova conta</legend>
-            <label>Nome: <input type="text" name="realName" placeholder="Seu nome" class="name" required></label><br />
+            <label>Nome: <input type="text" name="name" placeholder="Seu nome" class="name" required></label><br />
             <label>E-mail: <input type="email" name="email" placeholder="Insira seu email" class="email" required></label><br />
-            <label>Crie um login: <input type="text" name="login" class="login" required></label><br />
+            <label>Crie um login: <input type="text" name="username" class="login" required></label><br />
             <label>Senha: <input type="password" name="password" class="password" required></label><br />
             <label>confirme a senha: <input type="password" name="confirmPassword" class="confirmPassword" required></label><br />
-            <input type="button" value="Criar" class="createUser">
+            <input type="submit" value="Criar" class="createUser">
             <a href="/login">Voltar ao login</a>
         </fieldset>
     </form>
-    <script src="/script/validateNewUser.js"></script>
 </body>
 </html>

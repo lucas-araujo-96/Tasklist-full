@@ -1,31 +1,33 @@
 const path = require(`path`); //requisita o módulo path
 const userModel = require(path.join(__dirname, `..`, `models`, `userModel`)); //requisita o modelo de usuário do BD
+const Form = require(path.join(__dirname, `..`, `modules`, `Form`)); //requisita a classe Form
 
 exports.newUserGet = (req, res) => { //responde a página de criação de usuário a um GET
     res.render(`createAccount`);
 };
 
-exports.newUserPost = (req, res) => { //recebe os dados do formulário via post
-    const realName = req.body.realName;
+exports.newUserPost = async (req, res) => {
     const email = req.body.email;
-    const login = req.body.login;
+    const chkEmail = await Form.validateEmail(email);
+    const username = req.body.username;
+    const chkUsername = await Form.validateUsername(username);
+    const name = req.body.name; 
+    const chkName = await Form.validateName(name);
     const password = req.body.password;
-    userModel.find( {$or: [{ username: login}, { email: email}]}).then((query) => {
-        if(query.length === 0) {
-             userModel.create({ //cria a entrada no BD
-                name: realName,
-                username: login,
-                password: password,
-                email: email,
-            }).then(() => {
-                console.log(`User creation success`);
-                res.send(`Usuário criado`);
-            }).catch((e) => {
-                console.log(`MongoDB model creation error: ${e}`);
-            });
-        } else {
-            console.log(`Login or email already exists on userbase`);
-            res.render(`createAccount`);
-        };
-    });
+    const confPassword = req.body.confirmPassword;
+    const chkPassword = await Form.validatePassword(password, confPassword);
+
+    if(!chkEmail) res.render(`createAccount`);
+    else if(!chkUsername) res.render(`createAccount`);
+    else if(!chkName) res.render(`createAccount`);
+    else if(!chkPassword) res.render(`createAccount`);
+    else {
+        await userModel.create({
+            name: name,
+            username: username,
+            password: password,
+            email: email,
+        });
+        res.render(`login`);
+    };
 };

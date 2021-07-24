@@ -26,14 +26,21 @@
         <fieldset>
             <legend>Alterar senha:</legend>
             <label>Senha atual:
-                <input type="text" name="currPassword" class="currPassword" placeholder="Digite sua senha atual">
+                <input type="password" name="currPassword" class="currPassword" placeholder="Digite sua senha atual">
             </label>
             <label>Nova Senha:
-                <input type="text" name="newPassword" class="newPassword" placeholder="Digite uma nova senha">
+                <input type="password" name="newPassword" class="newPassword" placeholder="Digite uma nova senha">
             </label>
             <label>Repita a nova senha:
-                <input type="text" name="confNewPassword" class="confNewPassword" placeholder="Confirme a nova senha">
+                <input type="password" name="confNewPassword" class="confNewPassword" placeholder="Confirme a nova senha">
             </label>
+            <input type="submit" value="Alterar senha">
+        </fieldset>
+    </form>
+    <form method="GET" action="/deleteUser">
+        <fieldset>
+            <legend>Apagar Conta</legend>
+            <input type="submit" value="Apagar conta">
         </fieldset>
     </form>
     <script src="../../script/accountOptionsJS.js"></script>

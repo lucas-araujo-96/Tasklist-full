@@ -5,6 +5,7 @@ const loginControl = require(path.join(__dirname, `..`, `controllers`, `loginCon
 const newUserControl = require(path.join(__dirname, `..`, `controllers`, `newUserController`)); //requisita o controller da página de criação de usuário
 const mainControl = require(path.join(__dirname, `..`, `controllers`, `mainController`)); //requisita o controlador da página principal
 const optionsControl = require(path.join(__dirname, `..`, `controllers`, `userInfoController`));
+const deletionControl = require(path.join(__dirname, `..`, `controllers`, `deleteUserController`));
 
 router.get([`/`, `/login`], loginControl.loginGet); //get que responde a página inicial
 router.post(`/`, loginControl.loginPost);
@@ -16,5 +17,9 @@ router.get(`/logoff`, mainControl.logoff); //get que responde ao link de logoff
 
 router.get(`/accountOptions`, optionsControl.userInfoGet);
 router.post(`/updateInfo`, optionsControl.updateInfo);
+router.post(`/updatePassword`, optionsControl.updatePassword);
+
+router.get(`/deleteUser`, deletionControl.deleteUserGet);
+router.post(`/deleteUser`, deletionControl.deleteUserPost);
 
 module.exports = router; //exporta o roteador
