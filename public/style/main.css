@@ -19,3 +19,6 @@
     list-style: none;
     text-align: center;
 }
+.risked {
+    text-decoration: line-through;
+}
