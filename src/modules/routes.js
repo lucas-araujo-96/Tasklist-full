@@ -22,4 +22,6 @@ router.post(`/updatePassword`, optionsControl.updatePassword);
 router.get(`/deleteUser`, deletionControl.deleteUserGet);
 router.post(`/deleteUser`, deletionControl.deleteUserPost);
 
+router.post(`/updateTaskList`, mainControl.updateTaskList);
+
 module.exports = router; //exporta o roteador

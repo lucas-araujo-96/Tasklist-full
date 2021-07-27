@@ -5,6 +5,7 @@ const path = require(`path`); //requisita o módulo path
 const mongoose = require(`mongoose`); //requisita o módulo mongoose
 const session = require(`express-session`); //requisita o módulo express-session
 const connectMongo = require(`connect-mongo`); //requisita o módulo connect-mongo
+const bodyParser = require(`body-parser`);
 const router = require(path.join(__dirname, `src`, `modules`, `routes`)); //requisita o arquivo de configuração de rotas
 
 const server = express(); //instancia o servidor
@@ -20,6 +21,7 @@ const sessionOptions= session({ //define opções para a sessão
 
 server.use(express.static(path.resolve(__dirname, `public`))); //define a pasta de recursos estáticos
 server.use(express.urlencoded({extended: true})); //habilita o uso de urlencoded para envio de informações por método POST
+server.use(express.json());
 server.use(sessionOptions); //habilita o uso de sessões
 server.use(router); //habilita a configuração de rotas
 
