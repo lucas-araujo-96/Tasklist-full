@@ -15,13 +15,13 @@ router.post(`/createAccount`, newUserControl.newUserPost); //post que cria o nov
 
 router.get(`/logoff`, mainControl.logoff); //get que responde ao link de logoff
 
-router.get(`/accountOptions`, optionsControl.userInfoGet);
-router.post(`/updateInfo`, optionsControl.updateInfo);
-router.post(`/updatePassword`, optionsControl.updatePassword);
+router.get(`/accountOptions`, optionsControl.userInfoGet); //get que responde ao link de dados da conta
+router.post(`/updateInfo`, optionsControl.updateInfo); //post para atualização de dados do usuário
+router.post(`/updatePassword`, optionsControl.updatePassword); //post para atualização de senha
 
-router.get(`/deleteUser`, deletionControl.deleteUserGet);
-router.post(`/deleteUser`, deletionControl.deleteUserPost);
+router.get(`/deleteUser`, deletionControl.deleteUserGet); //get que responde a página de apagar conta
+router.post(`/deleteUser`, deletionControl.deleteUserPost); //post para apagar conta
 
-router.post(`/updateTaskList`, mainControl.updateTaskList);
+router.post(`/updateTaskList`, mainControl.updateTaskList); //rota de atualização das tasklists
 
 module.exports = router; //exporta o roteador

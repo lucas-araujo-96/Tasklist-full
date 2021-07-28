@@ -6,17 +6,18 @@ exports.newUserGet = (req, res) => { //responde a página de criação de usuár
     res.render(`createAccount`);
 };
 
-exports.newUserPost = async (req, res) => {
-    const email = req.body.email;
-    const chkEmail = await Form.validateEmail(email);
-    const username = req.body.username;
-    const chkUsername = await Form.validateUsername(username);
-    const name = req.body.name; 
-    const chkName = await Form.validateName(name);
-    const password = req.body.password;
-    const confPassword = req.body.confirmPassword;
-    const chkPassword = await Form.validatePassword(password, confPassword);
+exports.newUserPost = async (req, res) => { //criação de usuário
+    const email = req.body.email; //email
+    const chkEmail = await Form.validateEmail(email); //validação de email
+    const username = req.body.username; //username
+    const chkUsername = await Form.validateUsername(username); //validação de nome de usuário
+    const name = req.body.name; //nome
+    const chkName = await Form.validateName(name); //validação de nome
+    const password = req.body.password; //senha
+    const confPassword = req.body.confirmPassword; //confirmação de senha
+    const chkPassword = await Form.validatePassword(password, confPassword); //validação de senha
 
+    //faz as checagens, caso alguma das validações apresente problemas, volta para a mesma página, caso contrário, cria o usuário e o retorna para o login
     if(!chkEmail) res.render(`createAccount`);
     else if(!chkUsername) res.render(`createAccount`);
     else if(!chkName) res.render(`createAccount`);

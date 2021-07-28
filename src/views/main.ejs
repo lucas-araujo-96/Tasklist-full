@@ -24,7 +24,13 @@
                 </label>
             </fieldset>
         </form>
-        <ul class="lista"></ul>
+        <ul class="lista">
+            <% const TaskList = JSON.parse(list); %>
+            <% TaskList.forEach((taskItem) => { %>
+                <%- include('includes/li', taskItem); %>
+            <% }); %>
+        </ul>   
+        <% list %>
         <script src="/script/mainJS.js"></script>
     </div>
     
