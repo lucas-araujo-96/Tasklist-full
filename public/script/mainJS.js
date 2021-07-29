@@ -67,7 +67,7 @@ class TaskList { //classe da lista de tarefas, abrange a lista em si e o formulÃ
             },
             body:jsonString,
         };
-        fetch(`/updateTaskList`, options).then((fetched) => {
+        fetch(`/main`, options).then((fetched) => {
             return;
         });
         return;

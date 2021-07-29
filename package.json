@@ -1,6 +1,6 @@
 {
   "name": "projetotasklist-fullsystem",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Sistema de lista de tarefas incluindo front-end e back-end",
   "main": "server.js",
   "scripts": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/lucas-araujo-96/ProjetoTaskList-FullSystem#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "connect-mongo": "^4.4.1",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",

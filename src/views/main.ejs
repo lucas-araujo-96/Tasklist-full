@@ -25,12 +25,13 @@
             </fieldset>
         </form>
         <ul class="lista">
-            <% const TaskList = JSON.parse(list); %>
-            <% TaskList.forEach((taskItem) => { %>
-                <%- include('includes/li', taskItem); %>
-            <% }); %>
+            <% if(list !== null) { %>
+                <% const tasks = JSON.parse(list); %>
+                <% tasks.forEach((unit) => { %>
+                    <%- include("includes/li", {task: unit.task, risked: unit.risked}); %>
+                <% }); %>
+            <% }; %>
         </ul>   
-        <% list %>
         <script src="/script/mainJS.js"></script>
     </div>
     
