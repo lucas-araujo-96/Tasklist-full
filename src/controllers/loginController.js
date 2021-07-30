@@ -3,14 +3,18 @@ const bcrypt = require(`bcrypt`); //requisita o módulo bcrypt
 const userModel = require(path.join(__dirname, `..`, `models`, `userModel`)); //requisita o modelo de usuário
 
 exports.loginGet = async (req, res) => { //responde a página de login a um GET
+
     if(req.session.user) { //caso exista uma sessão logada...
         res.redirect(`/main`); //vai pra página principal
     } else {
         res.render(`login`); //caso não, vai para o login
     };
+
+    return;
 };
 
 exports.loginPost = async (req, res) => {
+
     const login = req.body.login; //username digitado
     const password = req.body.password; //senha digitada
 
@@ -29,4 +33,6 @@ exports.loginPost = async (req, res) => {
             res.render(`login`); //volta para o login
         };
     });
+
+    return;
 };

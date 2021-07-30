@@ -2,26 +2,23 @@ const path = require(`path`); //requisita o módulo path
 const taskListModel = require(path.join(__dirname, `..`, `models`, `taskListModel`)); //requisita o modelo de lista de tarefas
 
 exports.mainGet = async (req, res) => { //get da página
-    if (!req.session.user) { //caso o usuário não esteja logado, vai para o login
-        res.redirect(`/login`);
-        return;
-    };
 
     const list = await taskListModel.findOne({userID: req.session.user.id.toString()}); //consulta a lista de tarefas do usuário com base em seu ID
     if(list) res.render(`main`, {list: list.taskListString}); //se existir, é passada para a página
     else res.render(`main`, {list: null}) //caso não, é passo um valor null
+
+    return;
 };
     
 exports.logoff = (req, res) => { //para o link de logoff
+
     req.session.user = undefined; //"desdefine" o cookie do usuário
     res.redirect(`/login`); //volta pra página de login
+
+    return;
 };
 
 exports.updateTaskList = async (req, res) => { //para atualizar a lista de tarefas do usuário
-    if (!req.session.user) { //caso o usuário não esteja logado, vai para o login
-        res.redirect(`/login`);
-        return;
-    };
 
     const taskList = await taskListModel.findOne({userID: req.session.user.id.toString()}); //localiza o documento da lista de tarefas do usuário com base em seu id
     
@@ -32,6 +29,6 @@ exports.updateTaskList = async (req, res) => { //para atualizar a lista de taref
         await taskList.save(); //salva
     };
     
-    res.end(); //encerra a conexão
+    res.end();
     return;
 };

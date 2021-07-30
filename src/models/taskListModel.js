@@ -1,6 +1,6 @@
-const mongoose = require(`mongoose`);
+const mongoose = require(`mongoose`); //requisita o módulo mongoose
 
-const taskListSchema = new mongoose.Schema({ //Esquema: estrutura de dados das lsitas de tarefas no banco de dados
+const taskListSchema = new mongoose.Schema({ //Esquema: estrutura de dados das listas de tarefas no banco de dados
     userID: {type: String, required: true},
     taskListString: {type: String, required: false},
 });

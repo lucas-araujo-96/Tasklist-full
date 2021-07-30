@@ -1,4 +1,4 @@
-const mongoose = require(`mongoose`); //requisita o mongoose
+const mongoose = require(`mongoose`); //requisita o módulo mongoose
 
 const userSchema = new mongoose.Schema({ //Esquema: estrutura de dados dos usuários no banco de dados
     name: {type: String, required: true},

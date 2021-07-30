@@ -6,6 +6,7 @@ const mongoose = require(`mongoose`); //requisita o módulo mongoose
 const session = require(`express-session`); //requisita o módulo express-session
 const connectMongo = require(`connect-mongo`); //requisita o módulo connect-mongo
 const router = require(path.join(__dirname, `src`, `modules`, `routes`)); //requisita o arquivo de configuração de rotas
+const routeProtection = require(path.join(__dirname, `src`, `middlewares`, `routeProtection`)); //requisita o módulo de proteção de rotas
 
 const server = express(); //instancia o servidor
 const sessionOptions= session({ //define opções para a sessão
@@ -22,6 +23,7 @@ server.use(express.static(path.resolve(__dirname, `public`))); //define a pasta 
 server.use(express.urlencoded({extended: true})); //habilita o uso de urlencoded para envio de informações por método POST
 server.use(express.json()); //habilita a postagem de dados em JSON
 server.use(sessionOptions); //habilita o uso de sessões
+//server.use(routeProtection); //faz o servidor usar a proteção de rotas
 server.use(router); //habilita a configuração de rotas
 
 
