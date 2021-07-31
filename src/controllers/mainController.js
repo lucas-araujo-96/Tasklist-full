@@ -4,10 +4,9 @@ const taskListModel = require(path.join(__dirname, `..`, `models`, `taskListMode
 exports.mainGet = async (req, res) => { //get da página
 
     const list = await taskListModel.findOne({userID: req.session.user.id.toString()}); //consulta a lista de tarefas do usuário com base em seu ID
-    if(list) res.render(`main`, {list: list.taskListString}); //se existir, é passada para a página
-    else res.render(`main`, {list: null}) //caso não, é passo um valor null
+    if(list) res.render(`main`, {list: list.taskListString, name: req.session.user.name}); //se existir, é passada para a página
+    else res.render(`main`, {list: null, name: req.session.user.name}); //caso não, é passo um valor null
 
-    return;
 };
     
 exports.logoff = (req, res) => { //para o link de logoff
@@ -15,7 +14,6 @@ exports.logoff = (req, res) => { //para o link de logoff
     req.session.user = undefined; //"desdefine" o cookie do usuário
     res.redirect(`/login`); //volta pra página de login
 
-    return;
 };
 
 exports.updateTaskList = async (req, res) => { //para atualizar a lista de tarefas do usuário
@@ -29,6 +27,4 @@ exports.updateTaskList = async (req, res) => { //para atualizar a lista de taref
         await taskList.save(); //salva
     };
     
-    res.end();
-    return;
 };

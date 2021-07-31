@@ -7,6 +7,9 @@
     <title>Opções da conta</title>
 </head>
 <body>
+    <% if(error) { %>
+        <%- include("includes/error", {error: error}); %>
+    <% }; %>
     <form method="POST" action="/updateInfo" class="inforUpdate">
         <fieldset>
             <legend>Informações da conta:</legend>
@@ -43,6 +46,7 @@
             <input type="submit" value="Apagar conta">
         </fieldset>
     </form>
+    <a href="/main">Voltar</a>
     <script src="../../script/accountOptionsJS.js"></script>
 </body>
 </html>

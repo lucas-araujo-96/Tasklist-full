@@ -7,6 +7,9 @@
     <title>New Account</title>
 </head>
 <body>
+    <% if(error) { %>
+        <%- include("includes/error", {error: error}); %>
+    <% }; %>
     <form action="/createAccount" method="POST" class="form">
         <fieldset>
             <legend>Criar nova conta</legend>

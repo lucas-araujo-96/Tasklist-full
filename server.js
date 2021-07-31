@@ -23,9 +23,8 @@ server.use(express.static(path.resolve(__dirname, `public`))); //define a pasta 
 server.use(express.urlencoded({extended: true})); //habilita o uso de urlencoded para envio de informações por método POST
 server.use(express.json()); //habilita a postagem de dados em JSON
 server.use(sessionOptions); //habilita o uso de sessões
-//server.use(routeProtection); //faz o servidor usar a proteção de rotas
+server.use(routeProtection); //faz o servidor usar a proteção de rotas
 server.use(router); //habilita a configuração de rotas
-
 
 mongoose.connect(process.env.CONNECTIONSTRING, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => { //inicia a conexão ao mongo DB utilizando a variável de ambiente connectionString 
     console.log(`Database connected`);

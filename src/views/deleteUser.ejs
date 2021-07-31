@@ -7,6 +7,9 @@
     <title>Apagar usuário</title>
 </head>
 <body>
+    <% if(error) { %>
+        <%- include("includes/error", {error: error}); %>
+    <% }; %>
     <form action="/deleteUser" method="POST">
         <fieldset>
             <legend>Apagar usuário</legend>
@@ -18,5 +21,6 @@
             </label>
         </fieldset>
     </form>
+    <a href="/accountOptions">Voltar</a>
 </body>
 </html>

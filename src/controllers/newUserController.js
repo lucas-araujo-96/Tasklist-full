@@ -5,9 +5,8 @@ const Form = require(path.join(__dirname, `..`, `modules`, `Form`)); //requisita
 
 exports.newUserGet = (req, res) => { //responde a página de criação de usuário a um GET
 
-    res.render(`createAccount`); //renderiza a criação de conta
+    res.render(`createAccount`, {error: null}); //renderiza a criação de conta
 
-    return;
 };
 
 exports.newUserPost = async (req, res) => { //criação de usuário
@@ -23,7 +22,7 @@ exports.newUserPost = async (req, res) => { //criação de usuário
     const chkPassword = await Form.validatePassword(password, confPassword); //validação de senha
     
     //faz as checagens, caso alguma das validações apresente problemas, volta para a mesma página, caso contrário, cria o usuário e o retorna para o login
-    if(!chkEmail || !chkUsername || !chkName || !chkPassword) res.render(`createAccount`);
+    if(!chkEmail || !chkUsername || !chkName || !chkPassword) res.render(`createAccount`, {error: `Dados inválidos, favor verificar novamente`});
     else {
         bcrypt.hash(password, 10, (err, hash) => {
             userModel.create({
@@ -33,9 +32,9 @@ exports.newUserPost = async (req, res) => { //criação de usuário
                 email: email,
             });
             if(req.body.user) req.body.user = undefined;
-            res.redirect(`/login`);
+            
+            res.render(`login`, {error: `Conta criada`});
         });
     };
 
-    return;
 };
