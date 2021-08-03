@@ -26,5 +26,7 @@ exports.updateTaskList = async (req, res) => { //para atualizar a lista de taref
         taskList.taskListString = JSON.stringify(req.body); //atualiza a string da lista de tarefas
         await taskList.save(); //salva
     };
-    
+
+    res.end(); //fecha a conexão
+    return;
 };

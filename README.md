@@ -3,7 +3,7 @@
 Sistema de lista de tarefas incluindo front-end e back-end: 
 
 >Servidor node.js com Express (config em /server.js);<br />
->Views em ejs (em src/views) (em projeto);<br />
+>Views em ejs (em src/views) (em construção);<br />
 >Banco de dados MongoDB (modelos em src/models);<br />
 
 Projeto pessoal para estudo, desenvolvimento de uma lista de tarefas com servidor node e front com views em ejs, banco de dados MongoDB em cloud com sistema de login completo com criação de usuário, alteração de dados e possibilidade de deletar conta.

@@ -42,5 +42,3 @@ server.on(`connectionReady`, () => { //ao receber o sinal de que a database cone
         console.log(`To access, go to http://localhost:32000/`); //link para fácil acesso nesta interface
     });    
 });
-
-

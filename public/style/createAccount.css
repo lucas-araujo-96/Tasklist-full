@@ -1,0 +1,42 @@
+body {
+    background-color: #F7F7FF;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.newAccountBody {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.fieldSet {
+    border-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.form {
+    height: fit-content;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    width: fit-content;
+    background-color: #577399;
+    border-top: 60px;
+}
+a {
+    margin-top: 15px;
+    color: #fff;
+}
+legend {
+    margin-bottom: 15px;
+}
+.error {
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 100%;
+    background-color: #FE5F55;
+    text-align: center;
+    font-size: larger;
+    color: #F7F7FF;
+}

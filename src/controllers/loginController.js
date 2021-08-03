@@ -20,7 +20,7 @@ exports.loginPost = async (req, res) => {
     const user = await userModel.findOne({username: login}); //busca o registro pelo username
     
     if (user === null) { //caso não exista um usuário com o username digitado, volta a tela com a mensagem de erro
-        res.render(`login`, {error: `usuário não existe`});
+        res.render(`login`, {error: `Este usuário não existe.`});
         return;
     };
         

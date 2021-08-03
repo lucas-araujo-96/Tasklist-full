@@ -1,11 +1,11 @@
 class Task { //classe da tarefa
     constructor() { //construtor
-        this.taskText = document.querySelector(`.txtTarefa`).value; //texto da tarefa
+        this.taskText = document.querySelector(`.txtTask`).value; //texto da tarefa
         this.risked = false; //se ela está riscada ou não
     };
 
     static insertTask(node) { //insere o elemento recebido no DOM, na lista de tarefas
-        document.querySelector(`.lista`).appendChild(node);
+        document.querySelector(`.list`).appendChild(node);
     };
 
     static generateDeleteBtn() { //gera o botão de deletar
@@ -44,8 +44,8 @@ class Task { //classe da tarefa
 
 class TaskList { //classe da lista de tarefas, abrange a lista em si e o formulário
     constructor() {
-        this.taskList = document.querySelector(`.lista`);
-        this.taskForm = document.querySelector(`.newTarefa`);
+        this.taskList = document.querySelector(`.list`);
+        this.taskForm = document.querySelector(`.newTask`);
     };
 
     static listTasks() { //gera um array de objetos com as tarefas atualmente na lista
@@ -65,12 +65,12 @@ class TaskList { //classe da lista de tarefas, abrange a lista em si e o formul�
             headers: {
                 'Content-Type':'application/json',
             },
-            body:jsonString,
+            body: jsonString,
         };
+        console.log(`começando fetch`);
         fetch(`/main`, options).then((fetched) => {
             return;
         });
-        return;
     };
 
     newTask() { //gera nova tarefa e a anexa (gerada no formulário)

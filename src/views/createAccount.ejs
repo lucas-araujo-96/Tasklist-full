@@ -5,22 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Account</title>
+    <link href="/style/createAccount.css" rel="stylesheet">
 </head>
 <body>
-    <% if(error) { %>
-        <%- include("includes/error", {error: error}); %>
-    <% }; %>
-    <form action="/createAccount" method="POST" class="form">
-        <fieldset>
-            <legend>Criar nova conta</legend>
-            <label>Nome: <input type="text" name="name" placeholder="Seu nome" class="name" required></label><br />
-            <label>E-mail: <input type="email" name="email" placeholder="Insira seu email" class="email" required></label><br />
-            <label>Crie um login: <input type="text" name="login" class="login" required></label><br />
-            <label>Senha: <input type="password" name="password" class="password" required></label><br />
-            <label>confirme a senha: <input type="password" name="confirmPassword" class="confirmPassword" required></label><br />
-            <input type="submit" value="Criar" class="createUser">
-            <a href="/login">Voltar ao login</a>
-        </fieldset>
-    </form>
+    <div class="newAccountBody">
+        <% if(error) { %>
+            <%- include("includes/error", {error: error}); %>
+        <% }; %>
+        <form action="/createAccount" method="POST" class="form">
+            <fieldset class="fieldSet">
+                <legend>Criar nova conta</legend>
+                <label>Nome: <input type="text" name="name" placeholder="Seu nome" class="name" required></label><br />
+                <label>E-mail: <input type="email" name="email" placeholder="Insira seu email" class="email" required></label><br />
+                <label>Crie um login: <input type="text" name="login" class="login" required placeholder="Crie um login"></label><br />
+                <label>Senha: <input type="password" name="password" class="password" required placeholder="De 6 a 16 caracteres"></label><br />
+                <label>Repita a senha: <input type="password" name="confirmPassword" class="confirmPassword" required placeholder="Repita a senha"></label><br />
+                <input type="submit" value="Criar" class="createUser">
+                <a href="/login">Voltar ao login</a>
+            </fieldset>
+        </form>
+    </div>
 </body>
 </html>

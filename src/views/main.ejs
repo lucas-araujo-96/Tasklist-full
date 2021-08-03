@@ -8,7 +8,7 @@
     <link href="/style/main.css" rel="stylesheet">
 </head>
 <body>
-    <div class="body">
+    <div class="mainBody">
         <header class="header">
             <h1 class="titulo" class="headerChild">Olá <%- name %>, esta é sua lista de tarefas no momento:</h1>
             <div class="links">
@@ -16,15 +16,15 @@
                 <a href="/logoff" class="link">Sair</a>
             </div>
         </header>
-        <form method="POST" class="newTarefa">
+        <form method="POST" class="newTask">
             <fieldset>
                 <legend>Nova tarefa:</legend>
                 <label>
-                    <input type="text" class="txtTarefa"> <input type="button" value="Nova tarefa" class="newTarefaBtn">
+                    <input type="text" class="txtTask"> <input type="button" value="Nova tarefa" class="newTarefaBtn">
                 </label>
             </fieldset>
         </form>
-        <ul class="lista">
+        <ul class="list">
             <% if(list !== null) { %>
                 <% const tasks = JSON.parse(list); %>
                 <% tasks.forEach((unit) => { %>
@@ -34,6 +34,5 @@
         </ul>   
         <script src="/script/mainJS.js"></script>
     </div>
-    
 </body>
 </html>
