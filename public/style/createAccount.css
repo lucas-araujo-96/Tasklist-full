@@ -1,5 +1,4 @@
 body {
-    background-color: #F7F7FF;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .newAccountBody {
@@ -16,12 +15,12 @@ body {
     align-items: flex-end;
 }
 .form {
+    color: #FFF;
     height: fit-content;
     margin-top: 15px;
     padding: 10px;
-    border-radius: 10px;
     width: fit-content;
-    background-color: #577399;
+    background-color: #023E8A;
     border-top: 60px;
 }
 a {
@@ -33,7 +32,6 @@ legend {
 }
 .error {
     box-sizing: border-box;
-    border-radius: 10px;
     width: 100%;
     background-color: #FE5F55;
     text-align: center;
