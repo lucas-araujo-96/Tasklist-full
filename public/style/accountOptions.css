@@ -1,0 +1,49 @@
+.error {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #FE5F55;
+    text-align: center;
+    font-size: larger;
+    color: #F7F7FF;
+}
+.formBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items:flex-start;
+    background-color: #023E8A;
+    color: #FFF;
+    width: 80%;
+    min-width: 1000px;
+}
+body {
+    display: flex;
+    justify-content: flex-start;
+    overflow:scroll;
+}
+span {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+form {
+    text-align: center;
+    width: 100%;
+    min-width: 1000px;
+}
+fieldset {
+    border-style: none;
+}
+legend {
+    font-size: larger;
+}
+a {
+    color: #FFF;
+    padding: 15px;
+}
+
+@media screen and (max-width: 1200px) {
+    span {
+        justify-content: flex-start;
+    }
+}

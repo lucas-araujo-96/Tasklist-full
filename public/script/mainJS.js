@@ -1,7 +1,6 @@
 class Task { //classe da tarefa
     constructor() { //construtor
         this.taskText = document.querySelector(`.txtTask`).value; //texto da tarefa
-        this.risked = false; //se ela está riscada ou não
     };
 
     static insertTask(node) { //insere o elemento recebido no DOM, na lista de tarefas
@@ -67,7 +66,6 @@ class TaskList { //classe da lista de tarefas, abrange a lista em si e o formul�
             },
             body: jsonString,
         };
-        console.log(`começando fetch`);
         fetch(`/main`, options).then((fetched) => {
             return;
         });
@@ -95,6 +93,10 @@ class TaskList { //classe da lista de tarefas, abrange a lista em si e o formul�
             this.newTask();    
             TaskList.updateTaskList();
         }; 
+      });
+
+      this.taskForm.addEventListener(`submit`, (e) => { //impede que o formulário bugue a página ao pressionar enter           
+        e.preventDefault();
       });
     };
 };

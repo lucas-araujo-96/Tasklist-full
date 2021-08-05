@@ -33,6 +33,9 @@ body {
     padding: 0px;
 }
 .taskItem {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
     margin-bottom: 10px;
     left: -30px;
     width: 90%;
