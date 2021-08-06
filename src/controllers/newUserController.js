@@ -16,25 +16,25 @@ exports.newUserPost = async (req, res) => { //criação de usuário
     const password = req.body.password; //senha
     const confPassword = req.body.confirmPassword; //confirmação de senha
     
-    const chkEmail = await Form.validateEmail(email); //validação de email
-    const chkUsername = await Form.validateUsername(username); //validação de nome de usuário
-    const chkName = await Form.validateName(name); //validação de nome
-    const chkPassword = await Form.validatePassword(password, confPassword); //validação de senha
-    
     //faz as checagens, caso alguma das validações apresente problemas, volta para a mesma página, caso contrário, cria o usuário e o retorna para o login
-    if(!chkEmail || !chkUsername || !chkName || !chkPassword) res.render(`createAccount`, {error: `Dados inválidos, favor verificar novamente`});
-    else {
-        bcrypt.hash(password, 10, (err, hash) => {
-            userModel.create({
-                name: name,
-                username: username,
-                password: hash,
-                email: email,
-            });
-            if(req.body.user) req.body.user = undefined;
-            
-            res.render(`login`, {error: `Conta criada`});
+    if (!await Form.validateEmail(email)) return res.render(`createAccount`, {error: `E-mail inválido ou já em uso.`}); //validação de email
+
+    if (!await Form.validateUsername(username)) return res.render(`createAccount`, {error: `Nome de usuário inválido ou já em uso.`}); //validação de nome de usuário
+
+    if (!Form.validateName(name)) return res.render(`createAccount`, {error: `Informação de nome inválida.`}); //validação de nome
+
+    if (!Form.validatePassword(password, confPassword)) return res.render(`createAccount`, {error: `Senha inválida, deve conter ao menos 6 caracteres e os dois campos devem estar iguais.`}); //validação de senha
+        
+    //encripta a senha e cria o usuário com a hash
+    bcrypt.hash(password, 10, async (err, hash) => {
+        await userModel.create({
+            name: name,
+            username: username,
+            password: hash,
+            email: email,
         });
-    };
+        if(req.body.user) req.body.user = undefined;
+        res.render(`login`, {error: `Conta criada`});
+    });
 
 };

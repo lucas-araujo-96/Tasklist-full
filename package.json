@@ -1,6 +1,6 @@
 {
   "name": "projetotasklist-fullsystem",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sistema de lista de tarefas incluindo front-end e back-end",
   "main": "server.js",
   "scripts": {

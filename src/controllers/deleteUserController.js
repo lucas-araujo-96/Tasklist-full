@@ -3,11 +3,10 @@ const userModel = require(path.join(__dirname, `..`, `models`, `userModel`)); //
 const taskListModel = require(path.join(__dirname, `..`, `models`, `taskListModel`)); //requisita o modelo de taskList
 const bcrypt = require(`bcrypt`); //requisita o módulo bcrypt
 
-exports.deleteUserGet = (req, res) => { //rota para a página de confirmação para deletar o usuário
-
-    res.render(`deleteUser`, {error: null}); //vai para a página de confirmação
-
-};
+//rota para a página de confirmação para deletar o usuário
+exports.deleteUserGet = (req, res) => {
+    return res.render(`deleteUser`, {error: null}); //vai para a página de confirmação
+}; 
 
 exports.deleteUserPost = async (req, res) => { //rota para deletar o usuário
 
@@ -17,9 +16,9 @@ exports.deleteUserPost = async (req, res) => { //rota para deletar o usuário
         if (result) {
             await userModel.deleteOne({_id: req.session.user.id});
             await taskListModel.deleteOne({userID: req.session.user.id});
-            res.redirect(`logoff`);
+            return res.redirect(`logoff`);
         } else {
-            res.render(`deleteUser`, {error: `Senha inválida`}); //vai para a página de confirmação
+            return res.render(`deleteUser`, {error: `Senha inválida`}); //vai para a página de confirmação
         };
     });
 

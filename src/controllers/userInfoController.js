@@ -6,6 +6,7 @@ const Form = require(path.join(__dirname, `..`, `modules`, `Form`)); //requisita
 exports.userInfoGet = async (req, res) => { //abre a página de dados da conta com as informações do usuário
 
     const user = await userModel.findOne({_id: req.session.user.id});
+    
     res.render(`accountOptions`, {error: null, username: user.username, name: user.name, email: user.email});
     
 };
@@ -18,19 +19,18 @@ exports.updateInfo = async (req, res) => {  //função para atualização de dad
     const newEmail = req.body.email; //novo email
     const newUsername = req.body.username; //novo username
     
-    const chkName = await Form.validateName(newName); //validação do novo nome
-    const chkEmail = await Form.validateNewEmail(user.id, newEmail); //validação do novo email
-    const chkUsername = await Form.validateNewUsername(user.id, newUsername); //validação do novo username
-
     //checa as validações, caso alguma dê problemas, volta a página, caso contrário, atualiza as informações do usuário
-    if (!chkName || !chkEmail || !chkUsername) res.render(`accountOptions`, {error: `Dados inválidos, favor checar novamente`, username: user.username, name: user.name, email: user.email});
-    else { 
-        user.name = newName;
-        user.email = newEmail;
-        user.username = newUsername;
-        await user.save();
-        res.render(`accountOptions`, {error: `Dados atualizados`, username: user.username, name: user.name, email: user.email});
-    };
+    if (!Form.validateName(newName)) return res.render(`accountOptions`, {error: `Informação de nome inválida`, username: user.username, name: user.name, email: user.email}); //validação do novo nome
+
+    if (!await Form.validateNewEmail(user.id, newEmail)) return res.render(`accountOptions`, {error: `E-mail inválido ou já em uso`, username: user.username, name: user.name, email: user.email}); //validação do novo email
+
+    if (!await Form.validateNewUsername(user.id, newUsername)) return res.render(`accountOptions`, {error: `Nome de usuário inválido ou já em uso`, username: user.username, name: user.name, email: user.email}); //validação do novo username
+        
+    user.name = newName;
+    user.email = newEmail;
+    user.username = newUsername;
+    await user.save();
+    return res.render(`accountOptions`, {error: `Dados atualizados`, username: user.username, name: user.name, email: user.email});
 
 };
 
@@ -41,22 +41,16 @@ exports.updatePassword = async (req, res) => { //função para atualização de 
     const currentPassword = req.body.currPassword; //senha atual
     const password = req.body.newPassword; //nova senha
     const confPassword = req.body.confNewPassword; //confirmação da nova senha
-    const chkPassword = Form.validatePassword(password, confPassword); //validação da nova senha
 
     //checa as senhas e, caso sejam válidas, atualiza
-    if (!chkPassword) res.render(`accountOptions`, {error: `Senhas inválidas`, username: user.username, name: user.name, email: user.email});
-    else {
-        bcrypt.compare(currentPassword, user.password, async (err, result) => {
-            if(result) {
-                bcrypt.hash(password, 10, async (err, hash) => {
-                    user.password = hash;
-                    await user.save();
-                    res.render(`accountOptions`, {error: `Senha atualizada`, username: user.username, name: user.name, email: user.email});
-                });
-            } else {
-                res.render(`accountOptions`, {error: `Senha atual incorreta`, username: user.username, name: user.name, email: user.email});
-            };
-        });
-    };
+    if (!Form.validatePassword(password, confPassword)) return res.render(`accountOptions`, {error: `Senha nova inválida ou não confere.`, username: user.username, name: user.name, email: user.email}); //validação da nova senha
+
+    if (!await bcrypt.compare(currentPassword, user.password)) return res.render(`accountOptions`, {error: `Senha atual incorreta`, username: user.username, name: user.name, email: user.email});
+    
+    bcrypt.hash(password, 10, async (err, hash) => {
+        user.password = hash;
+        await user.save();
+        return res.render(`accountOptions`, {error: `Senha atualizada`, username: user.username, name: user.name, email: user.email});
+    });
 
 };
