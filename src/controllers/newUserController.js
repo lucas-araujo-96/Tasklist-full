@@ -10,26 +10,23 @@ exports.newUserGet = (req, res) => { //responde a página de criação de usuár
 };
 
 exports.newUserPost = async (req, res) => { //criação de usuário
-    const email = req.body.email; //email
-    const username = req.body.login; //username
-    const name = req.body.name; //nome
-    const password = req.body.password; //senha
-    const confPassword = req.body.confirmPassword; //confirmação de senha
+
+    const { email, login, name, password, confirmPassword } = req.body; //pega os dados do body
     
     //faz as checagens, caso alguma das validações apresente problemas, volta para a mesma página, caso contrário, cria o usuário e o retorna para o login
     if (!await Form.validateEmail(email)) return res.render(`createAccount`, {error: `E-mail inválido ou já em uso.`}); //validação de email
 
-    if (!await Form.validateUsername(username)) return res.render(`createAccount`, {error: `Nome de usuário inválido ou já em uso.`}); //validação de nome de usuário
+    if (!await Form.validateUsername(login)) return res.render(`createAccount`, {error: `Nome de usuário inválido ou já em uso.`}); //validação de nome de usuário
 
     if (!Form.validateName(name)) return res.render(`createAccount`, {error: `Informação de nome inválida.`}); //validação de nome
 
-    if (!Form.validatePassword(password, confPassword)) return res.render(`createAccount`, {error: `Senha inválida, deve conter ao menos 6 caracteres e os dois campos devem estar iguais.`}); //validação de senha
+    if (!Form.validatePassword(password, confirmPassword)) return res.render(`createAccount`, {error: `Senha inválida, deve conter ao menos 6 caracteres e os dois campos devem estar iguais.`}); //validação de senha
         
     //encripta a senha e cria o usuário com a hash
     bcrypt.hash(password, 10, async (err, hash) => {
         await userModel.create({
             name: name,
-            username: username,
+            username: login,
             password: hash,
             email: email,
         });

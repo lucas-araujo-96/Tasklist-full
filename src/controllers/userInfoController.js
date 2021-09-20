@@ -15,20 +15,18 @@ exports.updateInfo = async (req, res) => {  //função para atualização de dad
 
     const user = await userModel.findOne({_id: req.session.user.id}); //dados atuais do usuário
 
-    const newName = req.body.name; //novo nome
-    const newEmail = req.body.email; //novo email
-    const newUsername = req.body.username; //novo username
+    const {name, email, username} = req.body; //pega os dados enviados
     
     //checa as validações, caso alguma dê problemas, volta a página, caso contrário, atualiza as informações do usuário
-    if (!Form.validateName(newName)) return res.render(`accountOptions`, {error: `Informação de nome inválida`, username: user.username, name: user.name, email: user.email}); //validação do novo nome
+    if (!Form.validateName(name)) return res.render(`accountOptions`, {error: `Informação de nome inválida`, username: user.username, name: user.name, email: user.email}); //validação do novo nome
 
-    if (!await Form.validateNewEmail(user.id, newEmail)) return res.render(`accountOptions`, {error: `E-mail inválido ou já em uso`, username: user.username, name: user.name, email: user.email}); //validação do novo email
+    if (!await Form.validateNewEmail(user.id, email)) return res.render(`accountOptions`, {error: `E-mail inválido ou já em uso`, username: user.username, name: user.name, email: user.email}); //validação do novo email
 
-    if (!await Form.validateNewUsername(user.id, newUsername)) return res.render(`accountOptions`, {error: `Nome de usuário inválido ou já em uso`, username: user.username, name: user.name, email: user.email}); //validação do novo username
+    if (!await Form.validateNewUsername(user.id, username)) return res.render(`accountOptions`, {error: `Nome de usuário inválido ou já em uso`, username: user.username, name: user.name, email: user.email}); //validação do novo username
         
-    user.name = newName;
-    user.email = newEmail;
-    user.username = newUsername;
+    user.name = name;
+    user.email = email;
+    user.username = username;
     await user.save();
     return res.render(`accountOptions`, {error: `Dados atualizados`, username: user.username, name: user.name, email: user.email});
 
@@ -38,16 +36,14 @@ exports.updatePassword = async (req, res) => { //função para atualização de 
 
     const user = await userModel.findOne({_id: req.session.user.id}); //dados atuais do usuário
 
-    const currentPassword = req.body.currPassword; //senha atual
-    const password = req.body.newPassword; //nova senha
-    const confPassword = req.body.confNewPassword; //confirmação da nova senha
+    const { currPassword, newPassword, confNewPassword } = req.body; //pega os dados novos enviados
 
     //checa as senhas e, caso sejam válidas, atualiza
-    if (!Form.validatePassword(password, confPassword)) return res.render(`accountOptions`, {error: `Senha nova inválida ou não confere.`, username: user.username, name: user.name, email: user.email}); //validação da nova senha
+    if (!Form.validatePassword(newPassword, confNewPassword)) return res.render(`accountOptions`, {error: `Senha nova inválida ou não confere.`, username: user.username, name: user.name, email: user.email}); //validação da nova senha
 
-    if (!await bcrypt.compare(currentPassword, user.password)) return res.render(`accountOptions`, {error: `Senha atual incorreta`, username: user.username, name: user.name, email: user.email});
+    if (!await bcrypt.compare(currPassword, user.password)) return res.render(`accountOptions`, {error: `Senha atual incorreta`, username: user.username, name: user.name, email: user.email});
     
-    bcrypt.hash(password, 10, async (err, hash) => {
+    bcrypt.hash(newPassword, 10, async (err, hash) => {
         user.password = hash;
         await user.save();
         return res.render(`accountOptions`, {error: `Senha atualizada`, username: user.username, name: user.name, email: user.email});
