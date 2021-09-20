@@ -3,8 +3,9 @@ module.exports = (req, res, next) => { //impede que navegadores não logados ten
     const reqPath = req.path;
     const checkPath = (reqPath === `/` || reqPath === `/login` || reqPath === `/createAccount`); //lista de rotas que pode ser acessadas sem login
     if(!checkPath && req.session.user === undefined) { //verifica se a requisição está indo para uma rota interna sem se logar
-        res.redirect(`login`); //caso esteja, volta pro login
-        return; 
+        
+        return res.redirect(`login`); //caso esteja, volta pro login
+         
     };
         
     next();

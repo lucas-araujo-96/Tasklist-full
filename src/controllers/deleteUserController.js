@@ -5,7 +5,9 @@ const bcrypt = require(`bcrypt`); //requisita o módulo bcrypt
 
 //rota para a página de confirmação para deletar o usuário
 exports.deleteUserGet = (req, res) => {
+
     return res.render(`deleteUser`, {error: null}); //vai para a página de confirmação
+    
 }; 
 
 exports.deleteUserPost = async (req, res) => { //rota para deletar o usuário
